@@ -1,5 +1,4 @@
 version: 0.2
-
 phases:
   install:
     runtime-versions:
@@ -9,8 +8,8 @@ phases:
       - ./mvnw clean install
   build:
     commands:
-      - echo Build completed on `date`
-artifacts:
-  files:
-    - '**/target/*.jar'
-  base-directory: backend
+      - docker build -t backend-repo ./backend
+      - docker tag backend-repo:latest <your-id>.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest
+  post_build:
+    commands:
+      - docker push 542267705220.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest

@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - cd frontend/"ReactJs Basic Project"
+      - cd frontend
       - npm install
   build:
     commands:

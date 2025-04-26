@@ -10,4 +10,8 @@ public class DemoController {
     public String home() {
         return "Hello from Backend!";
     }
+    @GetMapping("/welcome")
+    public String home1() {
+        return "Hello from welcome!";
+    }
 }

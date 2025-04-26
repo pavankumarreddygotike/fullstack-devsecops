@@ -8,6 +8,7 @@ phases:
       - cd backend                     # move into backend folder
       - chmod +x mvnw                  # give executable permission to mvnw
       - ./mvnw clean install           # build springboot project
+      - ./mvnw org.owasp:dependency-check-maven:check
       - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006.zip
       - unzip sonar-scanner.zip
       - export PATH=$PATH:$(pwd)/sonar-scanner-5.0.1.3006/bin

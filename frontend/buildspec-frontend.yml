@@ -10,8 +10,10 @@ phases:
   build:
     commands:
       - npm run build
-      - docker build -t frontend-repo ./frontend/"ReactJs Basic Project"
-      - docker tag frontend-repo:latest <your-id>.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
+      - docker build -t frontend-repo .
+      - docker tag frontend-repo:latest 542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
   post_build:
     commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 542267705220.dkr.ecr.us-east-1.amazonaws.com
       - docker push 542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest

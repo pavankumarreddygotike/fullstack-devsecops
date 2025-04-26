@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - cd backend
+      - ./mvnw clean install
+  build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - '**/target/*.jar'
+  base-directory: backend

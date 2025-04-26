@@ -5,12 +5,15 @@ phases:
     runtime-versions:
       java: corretto17
     commands:
-      - cd backend
-      - ./mvnw clean install
+      - cd backend                     # move into backend folder
+      - chmod +x mvnw                  # give executable permission to mvnw
+      - ./mvnw clean install           # build springboot project
+
   build:
     commands:
-      - docker build -t backend-repo .
+      - docker build -t backend-repo . # build docker image
       - docker tag backend-repo:latest 542267705220.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest
+
   post_build:
     commands:
       - echo Logging in to Amazon ECR...

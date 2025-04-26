@@ -10,11 +10,13 @@ phases:
       - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006.zip
       - unzip sonar-scanner.zip
       - export PATH=$PATH:$(pwd)/sonar-scanner-5.0.1.3006/bin
+
   build:
     commands:
       - npm run build
       - docker build -t frontend-repo .
       - docker tag frontend-repo:latest 542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
+
   post_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -22,12 +24,14 @@ phases:
       - docker push 542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
       - cd ..
       - printf '[{"name":"frontend","imageUri":"542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest"}]' > imagedefinitions.json
-      - sonar-scanner \
-        -Dsonar.projectKey=devsecops221_devsecops
-        -Dsonar.organization=devsecops221
-        -Dsonar.sources=.
-        -Dsonar.host.url=https://sonarcloud.io
-        -Dsonar.login=$SONAR_TOKEN
+      - echo Running SonarCloud scan...
+      - |
+        sonar-scanner \
+          -Dsonar.projectKey=devsecops221_devsecops \
+          -Dsonar.organization=devsecops221 \
+          -Dsonar.sources=frontend \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
 
 artifacts:
   files:

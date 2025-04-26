@@ -14,4 +14,4 @@ phases:
       - docker tag frontend-repo:latest <your-id>.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
   post_build:
     commands:
-      - docker push <your-id>.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest
+      - docker push 542267705220.dkr.ecr.us-east-1.amazonaws.com/frontend-repo:latest

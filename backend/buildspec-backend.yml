@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -8,8 +9,10 @@ phases:
       - ./mvnw clean install
   build:
     commands:
-      - docker build -t backend-repo ./backend
-      - docker tag backend-repo:latest <your-id>.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest
+      - docker build -t backend-repo .
+      - docker tag backend-repo:latest 542267705220.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest
   post_build:
     commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 542267705220.dkr.ecr.us-east-1.amazonaws.com
       - docker push 542267705220.dkr.ecr.us-east-1.amazonaws.com/backend-repo:latest

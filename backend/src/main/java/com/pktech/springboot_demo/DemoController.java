@@ -14,4 +14,13 @@ public class DemoController {
     public String home1() {
         return "Hello from welcome!";
     }
+
+    @GetMapping("/")
+    public String home2() {
+        return "Hello from Backend!";
+    }
+    @GetMapping("/welcome")
+    public String home3() {
+        return "Hello from welcome!";
+    }
 }
